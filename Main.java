@@ -1,94 +1,172 @@
-import java.util.Locale;
+//334018207
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-public class Main {
+/*
+The program functionality:
+The program should get the number n n and do the following steps:
+1)To find and print two prime numbers before n that would give n after multiplication.
+2)To find and print two prime numbers that would result n after subtracting.
+3)To print the exact amount of prime numbers that exist before n
+4)To print prime decomposition of the n
+5)To print the id
+6)TO print the runtime
+ */
+ // pseudocode:
+/* 1)The first function that would check which two number would give n
+int p1
+int p2
+for int i = 2, i < n, i++)
+if (isPrime(i) && isPrime(n - i))
+print("<+> " +i +" + "+ (n - i) + " = " + n)
+The function that checks if the number is prime or not
+static boolean isPrime(int n)
+if n <= 1
+return false
+for int i = 2; i * i <= root squared(n); i++
+if n % i == 0
+return false
+2)This function would do exactly what the first one does but with subscription
+int p3 = 2, p4;
+while true -->
+p4 = p3 + n;
+if isPrime(p4) && isPrime(p3 //And condition if the two of them are true
+print("<+> " + p4 + " - " + p3 + " = " + n)
+p3 = p3 + 1
+3)This function will give us the amount of the prime numbers
+public static int countPrimes(int x)
+int count = 0
+for (int i = 2; i < x; i++)
+if (isPrime(i))
+count = count + 1
+return count
+4) The function that will return prime composition
+public static ArrayList<Object> primeComposition (int n) {
+ArrayList<Object> list = new ArrayList<>() // We need some kind of a list to put things in it
+int divider = 2
+int result = n
+while (result > 1)
+if (result % divider = 0) // if the remainder is 0 we won't even check
+result = result / divider // The algo will try to divide the given number n by a number that will increase every step. In case action has succeeded we will add the result to the list.
+list.add(divider)
+divider = 2
+else
+divider += 1
+return list
+
+5) Print my id
+print(my id)
+
+6)Check the runtime
+We will check the current time using System.current timeMills and we will do the same in the end of the code execution, then we will substructure one from another and get the actual time.
+
+ */
+
+
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Ex0 {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n;
+        System.out.println("Enter your number");
+        n = scanner.nextInt();
+        long startTime = System.currentTimeMillis();
 
-        // Working with int data type
-        int a = 5; // Declaring an integer 'a' and assigning it the value 5
-        int b = 2; // Declaring an integer 'b' and assigning it the value 2
+        if (n < 4 && n % 2 != 0) {
+            System.out.println("we need to stop ");
+            return;
+        }
 
-        int c = a + b; // Adding 'a' and 'b' and storing the result in 'c'
-        System.out.println("a + b: " + c); // Output: 7
+        //a
+        int p1, p2;
+        for (int i = 2; i < n; i++) {
+            if (isPrime(i) && isPrime(n - i)) {
+                System.out.println("<+> " +i +" + "+ (n - i) + " = " + n);
+                break;
+            }
+        }
 
-        c = a - b; // Subtracting 'b' from 'a'
-        System.out.println("a - b: " + c); // Output: 3
+        //b
+        int p3 = 2, p4;
+        while (true) {
+            p4 = p3 + n;
+            if (isPrime(p4) && isPrime(p3)) {
+                System.out.println("<+> " + p4 + " - " + p3 + " = " + n);
+                break;
+            }
+            p3++;
 
-        c = a * b; // Multiplying 'a' by 'b'
-        System.out.println("a * b: " + c); // Output: 10
+        }
+        System.out.println("<+> The exact amout of prime numbers between 0 and " + n +  "-->" + countPrimes(n));
+        System.out.print("<+> The prime numbers that would result the n after multiplication ---> ");
+        ArrayList<Object> prime = new ArrayList<>();
+        int count = 0;
+        prime = primeComposition(n);
+        while (count < prime.size()) {
+            if (count != prime.size()-1) {
+                System.out.print(prime.get(count) + " * ");
+            }else {
+                System.out.print(prime.get(count) + " = " + n);
+            }
+                count += 1;
+        }
+        int ad = 3;
+        System.out.println("");
+        System.out.println("<+> My id : 334018207");
 
-        c = a / b; // Dividing 'a' by 'b' (integer division, so no decimals)
-        System.out.println("a / b: " + c); // Output: 2
+        long endTime = System.currentTimeMillis();
+        long resulttime = (long) ((endTime-startTime));
+        System.out.println("<+> The runtime in miliseconds = "  + resulttime);
+    }
 
-        c = a % b; // Finding the remainder of 'a' divided by 'b'
-        System.out.println("a % b: " + c); // Output: 1
+    //c
+    public static int countPrimes(int x) {
+        int count = 0;
 
+        for (int i = 2; i < x; i++) {
+            if (isPrime(i)) {
+                count++;
+            }
+        }
 
-        // Working with double data type with decimal numbers
-        double x = 5.5; // Declaring a double 'x' and assigning it the value 5.5
-        double y = 2.3; // Declaring a double 'y' and assigning it the value 2.3
-
-        double z = x + y; // Adding 'x' and 'y'
-        System.out.println("x + y: " + z); // Output: 7.8
-
-        z = x - y; // Subtracting 'y' from 'x'
-        System.out.println("x - y: " + z); // Output: 3.2
-
-        z = x * y; // Multiplying 'x' by 'y'
-        System.out.println("x * y: " + z); // Output: 12.65
-
-        z = x / y; // Dividing 'x' by 'y' (result has decimals)
-        System.out.println("x / y: " + z); // Output: 2.391304347826087
-
-        z = x % y; // Finding the remainder of 'x' divided by 'y'
-        System.out.println("x % y: " + z); // Output: 0.8999999999999999 (due to floating-point precision)
-
-
-        // Working with char data type
-        char d = 'a'; // Declaring a char 'd' with the value 'a'
-        char e = '@'; // Declaring a char 'e' with the value '@'
-        char s = '~'; // Declaring a char 's' with the value '~'
-        char g = '6'; // Declaring a char 'g' with the value '6'
-        char h = '9'; // Declaring a char 'h' with the value '9'
-
-        System.out.println("Character g: " + g); // Output: 6
-
-
-        // Working with String data type
-        String i = "Hello World!"; // Declaring a String 'i' with the value "Hello World!"
-        String j = "a"; // Declaring a String 'j' with the value "a"
-        String k;
-
-        k = i.toLowerCase(); // Converts 'i' to lowercase
-        System.out.println("i.toLowerCase(): " + k); // Output: hello world!
-
-        k = i.toUpperCase(); // Converts 'i' to uppercase
-        System.out.println("i.toUpperCase(): " + k); // Output: HELLO WORLD!
-
-        k = i.replace('o', '#'); // Replaces 'o' with '#' in 'i'
-        System.out.println("i.replace('o', '#'): " + k); // Output: Hell# W#rld!
-
-        char m = i.charAt(6); // Retrieves the character at index 6 in 'i'
-        System.out.println("i.charAt(6): " + m); // Output: W
-
-        k = i.substring(2, 7); // Extracts substring from index 2 to 6
-        System.out.println("i.substring(2, 7): " + k); // Output: llo W
-
-        k = i.substring(5); // Extracts substring from index 5 to the end
-        System.out.println("i.substring(5): " + k); // Output: World!
+        return count;
 
 
-        // Working with boolean data type
-        boolean t = true; // Declaring a boolean 't' with the value true
-        boolean f = false; // Declaring a boolean 'f' with the value false
+    }
+    static boolean isPrime(int n) {
+        if (n <= 1) {
+            return false;
+        }
 
-        System.out.println("Boolean t: " + t); // Output: true
-        System.out.println("Boolean f: " + f); // Output: false
+        for (int i = 2; i * i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
 
-        System.out.println("t && f: " + (t && f)); // Logical AND: true and false, Output: false
-        System.out.println("t || f: " + (t || f)); // Logical OR: true or false, Output: true
-        System.out.println("t && !f: " + (t && !f)); // Logical AND: true and NOT false, Output: true
-        System.out.println("!t || f: " + (!t || f)); // Logical OR: NOT true or false, Output: false
+        return true;
+    }
 
-        System.out.println("i.equals(\"Hello World!\"): " + i.equals("Hello World!")); // Checks if 'i' equals "Hello World!", Output: true
+//d
+    public static ArrayList<Object> primeComposition (int n) {
+        ArrayList<Object> list = new ArrayList<>();
+        int divider = 2;
+        int result = n;
+        while (result > 1){
+            if (result % divider == 0) {
+                result = result / divider;
+                list.add(divider);
+                divider = 2;
+            } else {
+                divider += 1;
+            }
+        }
+        return list;
+
+
     }
 }
+
